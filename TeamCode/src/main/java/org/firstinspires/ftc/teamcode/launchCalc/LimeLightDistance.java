@@ -76,7 +76,7 @@ public class LimeLightDistance extends OpMode {
             // target area
             telemetry.addData("Target Area", llResult.getTa());
 
-            ballistics.ballisticsStats(telemetry, xDistanceInches(llResult), 0.0);
+            ballistics.ballisticsStats(telemetry, xDistanceInches(llResult), ballistics.kSlip);
             ballistics.robotStats(telemetry);
 
         }

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.launchCalc;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class ballistics {
@@ -10,7 +12,7 @@ public class ballistics {
     double launcherCos = Math.cos(launcherAngleRad);
     double launcherTan = Math.tan(launcherAngleRad);
     double wheelRadius = 0.0375; // meters
-    double kSlip = 1.0; // 1.0 = 100% efficiency
+    double kSlip = 0.00;
     double targetHeight = 1.22; // meters want inches
     double goalDiff = targetHeight - launcherHeight;
 
@@ -34,16 +36,12 @@ public class ballistics {
 
     // returns the slope of the projectile at distance x
     double projectile_slope_given_x(double v, double x) {
-        // Derivative of trajectory equation: y' = tan(theta) - (g * x) / (v^2 *
-        // cos^2(theta))
-        return launcherTan - (g * x) / (v * v * launcherCos * launcherCos);
+        return launcherTan - (g * x) / (v * v * launcherCos * launcherTan);
     }
 
     // converts ball velocity to wheel rpm
     double velocity2rpm(double vBall, double wheelRadius, double kSlip) {
         // vBall = kSlip * vWheel
-        if (kSlip == 0)
-            return 0;
         double vWheel = vBall / kSlip;
         return (vWheel * 60) / (2 * Math.PI * wheelRadius);
     }
