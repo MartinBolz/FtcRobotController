@@ -60,6 +60,17 @@ public class MechanumDrive {
 
     }
 
+    public void tankDrive(double leftPower, double rightPower) {
+        // Note: Because you reversed the left motors in init(),
+        // sending a positive leftPower will make them go forward.
+        lf.setPower(-leftPower);
+        lr.setPower(leftPower);
+
+        // Right motors are not reversed, so positive rightPower makes them go forward.
+        rf.setPower(-rightPower);
+        rr.setPower(rightPower);
+    }
+
     public void driveFieldRelative(double forward, double strafe, double rotate){
         double theta = Math.atan2(forward, strafe);
         double r = Math.hypot(strafe, forward);
